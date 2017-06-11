@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 import * as actions from './redux/actions';
+import CharacterList from './components/CharacterList';
 import './App.css';
 
 class App extends Component {
@@ -12,13 +13,16 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Maple Scrolls</h1>
+        <CharacterList characters={ this.props.characters } onAddCharacter={ this.props.actions.addCharacter }selectedCharacter={ this.props.currentCharacter }></CharacterList>
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  characters: state.characters
+  characters: state.characters,
+  charactersLength: Object.keys(state.characters).length,
+  currentCharacter: state.currentCharacter
 })
 
 const mapDispatchToProps = dispatch => ({

@@ -5,7 +5,8 @@ import {
   ADD_CHARACTER_TYPE,
   DELETE_CHARACTER_TYPE,
   ADD_SCROLL_TO_CHARACTER_TYPE,
-  REMOVE_SCROLL_FROM_CHARACTER_TYPE
+  REMOVE_SCROLL_FROM_CHARACTER_TYPE,
+  SELECT_CHARACTER
 } from './actions';
 
 type state = {
@@ -13,42 +14,57 @@ type state = {
     [string]: {
       [number]: number
     }
-  }
+  },
+  currentCharacter: string
 }
 
 const initalState: state = {
-  characters: {}
+  characters: {},
+  currentCharacter: ""
 }
 
 export default function (state: state = initalState, action: Actionable) {
   let character = state.characters[action.name];
-  let scroll;
+  let newState = Object.assign({}, state);
+
   switch (action.type) {
     case ADD_CHARACTER_TYPE:
       if (character === undefined) {
-        state.characters[action.name] = {};
+        newState.characters = Object.assign({}, newState.characters, { [action.name]: {} });
+
+        return newState;
       }
 
       return state;
     case DELETE_CHARACTER_TYPE:
-      delete state.characters[action.name];
+      newState.characters = Object.assign({}, newState.characters);
+      delete newState.characters[action.name];
 
-      return state;
+      return newState;
     case ADD_SCROLL_TO_CHARACTER_TYPE:
-      character = state.characters[action.name];
-
       if (character !== undefined) {
-        character[action.scrollId] = (character[action.scrollId] || 0) + action.numberToAdd;
+        newState.characters = Object.assign({}, newState.characters);
+        newState.characters[action.name] = Object.assign({}, newState.characters[action.name]);
+        newState.characters[action.name][action.scrollId] = (newState.characters[action.name][action.scrollId] || 0) + action.numberToAdd;
+        return newState;
       }
 
       return state;
     case REMOVE_SCROLL_FROM_CHARACTER_TYPE:
       if (character !== undefined) {
-        scroll = character[action.scrollId];
+        newState.characters = Object.assign({}, newState.characters);
+        newState.characters[action.name] = Object.assign({}, newState.characters[action.name]);
 
-        if (scroll !== undefined) {
-          character[action.scrollId] -= action.numberToRemove;
+        if (newState.characters[action.name][action.scrollId] !== undefined) {
+          newState.characters[action.name][action.scrollId] -= action.numberToRemove;
         }
+      }
+
+      return state;
+    case SELECT_CHARACTER:
+      if (character !== undefined) {
+        newState.currentCharacter = action.name;
+        return newState;
       }
 
       return state;
