@@ -12,7 +12,8 @@ class CharacterList extends Component {
         <ul>
           {
             Object.keys(this.props.characters).map((name) => {
-              return <CharacterListItem key={ name } name={ name } onDeleteCharacter={ this.props.onDeleteCharacter } />;
+              let selected = name === this.props.selectedCharacter;
+              return <CharacterListItem key={ name } name={ name } onDeleteCharacter={ this.props.onDeleteCharacter } onSelectCharacter={ this.props.onSelectCharacter } selected={ selected }/>;
             })
           }
         </ul>
