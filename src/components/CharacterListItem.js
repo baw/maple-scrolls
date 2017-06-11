@@ -1,6 +1,15 @@
+/* @flow */
+
 import React, { Component } from 'react';
 
 class CharacterListItem extends Component {
+  props: {
+    name: string,
+    onDeleteCharacter: (name: string) => void,
+    onSelectCharacter: (name: string) => void,
+    selected: boolean
+  }
+
   deleteCharacter() {
     this.props.onDeleteCharacter(this.props.name);
   }

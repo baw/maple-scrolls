@@ -1,6 +1,12 @@
+/* @flow */
+
 import React, { Component } from 'react';
 
 class AddCharacter extends Component {
+  props: {
+    onAddCharacter: (name: string) => void
+  }
+
   onKeyPressHandler(event) {
     if (event.key === 'Enter') {
       let name = this.refs.input.value;

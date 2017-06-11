@@ -1,9 +1,21 @@
+/* @flow */
+
 import React, { Component } from 'react';
 
 import AddCharacter from './AddCharacter';
 import CharacterListItem from './CharacterListItem';
 
 class CharacterList extends Component {
+  props: {
+    characters: {
+      [string]: number
+    },
+    onAddCharacter: (name: string) => void,
+    onDeleteCharacter: (name: string) => void,
+    onSelectCharacter: (name: string) => void,
+    selectedCharacter: string
+  }
+
   render() {
     return (
       <div>
