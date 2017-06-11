@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 
 import * as actions from './redux/actions';
 import CharacterList from './components/CharacterList';
+import Scrolls from './components/Scrolls';
 import './App.css';
 
 class App extends Component {
@@ -14,6 +15,7 @@ class App extends Component {
       <div className="App">
         <h1>Maple Scrolls</h1>
         <CharacterList characters={ this.props.characters } onAddCharacter={ this.props.actions.addCharacter } onDeleteCharacter={ this.props.actions.deleteCharacter } selectedCharacter={ this.props.currentCharacter } onSelectCharacter={ this.props.actions.selectCharacter }></CharacterList>
+        <Scrolls scrolls={ this.props.characters[this.props.currentCharacter] } characterName={ this.props.currentCharacter } onAddScroll={ this.props.actions.addScrollToCharacter } ></Scrolls>
       </div>
     );
   }
