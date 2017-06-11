@@ -13,7 +13,7 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Maple Scrolls</h1>
-        <CharacterList characters={ this.props.characters } onAddCharacter={ this.props.actions.addCharacter }selectedCharacter={ this.props.currentCharacter }></CharacterList>
+        <CharacterList characters={ this.props.characters } onAddCharacter={ this.props.actions.addCharacter } onDeleteCharacter={ this.props.actions.deleteCharacter } selectedCharacter={ this.props.currentCharacter }></CharacterList>
       </div>
     );
   }

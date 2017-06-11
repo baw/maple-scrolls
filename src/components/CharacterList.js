@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import AddCharacter from './AddCharacter';
+import CharacterListItem from './CharacterListItem';
 
 class CharacterList extends Component {
   render() {
@@ -10,8 +11,8 @@ class CharacterList extends Component {
         Characters:
         <ul>
           {
-            Object.keys(this.props.characters).map(function (name) {
-              return <li key={ name }>{ name }</li>;
+            Object.keys(this.props.characters).map((name) => {
+              return <CharacterListItem key={ name } name={ name } onDeleteCharacter={ this.props.onDeleteCharacter } />;
             })
           }
         </ul>
