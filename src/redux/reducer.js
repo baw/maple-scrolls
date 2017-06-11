@@ -5,8 +5,8 @@ import {
   ADD_CHARACTER_TYPE,
   DELETE_CHARACTER_TYPE,
   ADD_SCROLL_TO_CHARACTER_TYPE,
-  REMOVE_SCROLL_TO_CHARACTER_TYPE
-} from './actionTypes';
+  REMOVE_SCROLL_FROM_CHARACTER_TYPE
+} from './actions';
 
 type state = {
   characters: {
@@ -42,7 +42,7 @@ export default function (state: state = initalState, action: Actionable) {
       }
 
       return state;
-    case REMOVE_SCROLL_TO_CHARACTER_TYPE:
+    case REMOVE_SCROLL_FROM_CHARACTER_TYPE:
       if (character !== undefined) {
         scroll = character[action.scrollId];
 
@@ -52,5 +52,7 @@ export default function (state: state = initalState, action: Actionable) {
       }
 
       return state;
+    default:
+      return state
   }
 }
