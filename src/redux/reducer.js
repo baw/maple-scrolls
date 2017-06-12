@@ -69,6 +69,6 @@ export default function (state: state = initalState, action: Actionable) {
 
       return state;
     default:
-      return state
+      return state;
   }
 }

@@ -29,7 +29,7 @@ class AddScroll extends Component {
   handleSubmit(event: SyntheticEvent) {
     event.preventDefault();
 
-    let numberToAdd = this.refs.count.value;
+    let numberToAdd = parseInt(this.refs.count.value, 0);
 
     let scrollName = this.refs.scroll.getInstance().state.selected[0];
     let scrollId = allScrolls.indexOf(scrollName);

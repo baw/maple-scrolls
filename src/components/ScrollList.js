@@ -17,7 +17,7 @@ class ScrollList extends Component {
       <ul>
         {
           scrollIds.map((scrollId) => {
-            return <li key={ scrollId }>{ allScrolls[scrollId] } - { parseInt(this.props.scrolls[1], 10) } </li>
+            return <li key={ scrollId }>{ allScrolls[scrollId] } - { this.props.scrolls[scrollId] } </li>
           })
         }
       </ul>
