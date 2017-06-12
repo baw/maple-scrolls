@@ -2,6 +2,8 @@
 
 import React, { Component } from 'react';
 
+import allScrolls from '../allScrolls';
+
 class ScrollList extends Component {
   props: {
     scrolls: {
@@ -15,7 +17,7 @@ class ScrollList extends Component {
       <ul>
         {
           scrollIds.map((scrollId) => {
-            return <li key={ scrollId }>{ scrollId } - { this.props.scrolls[1] } </li>
+            return <li key={ scrollId }>{ allScrolls[scrollId] } - { parseInt(this.props.scrolls[1], 10) } </li>
           })
         }
       </ul>
