@@ -1,10 +1,9 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import { Typeahead } from 'react-bootstrap-typeahead';
-import Highligher from 'react-highlighter';
 
 import allScrolls from '../allScrolls';
+import TypeaheadScrolls from './TypeaheadScrolls';
 
 class AddScroll extends Component {
   props: {
@@ -12,26 +11,12 @@ class AddScroll extends Component {
     onAddScroll: (name: string, scrollId: number, numberToAdd: number) => void
   }
 
-  filterBy(option: string, searchText: string) {
-    searchText = searchText.toLowerCase();
-    option = option.toLowerCase();
-
-    if (option.includes(searchText)) {
-      return true;
-    } else {
-      let split = searchText.split(' ');
-      return split.every((splitText) => {
-        return option.includes(splitText);
-      });
-    }
-  }
-
   handleSubmit(event: SyntheticEvent) {
     event.preventDefault();
 
     let numberToAdd = parseInt(this.refs.count.value, 0);
 
-    let scrollName = this.refs.scroll.getInstance().state.selected[0];
+    let scrollName = this.refs.scroll.getSelectedScrollName();
     let scrollId = allScrolls.indexOf(scrollName);
 
     if (scrollId !== -1) {
@@ -39,21 +24,12 @@ class AddScroll extends Component {
     }
   }
 
-  renderMenuItemChildren(result: string, props: Object) {
-    let searchText = props.text.split(' ').filter(function (string) {
-      return string !== '' && string !== ' ';
-    }).join('|');
-
-    let regex = new RegExp(searchText, 'i');
-    return <Highligher search={ regex } >{ result }</Highligher>;
-  }
-
   render() {
     return (
       <form onSubmit={ this.handleSubmit.bind(this) }>
-        <label>Scroll <Typeahead ref="scroll" options={ allScrolls } minLength={ 1 } maxResults={ 5 } filterBy={ this.filterBy } renderMenuItemChildren={ this.renderMenuItemChildren } /></label>
-        <label>Count <input ref="count" type="number" /></label>
-        <input type="submit" value="Add" />
+        <label>Scroll <TypeaheadScrolls ref='scroll' scrolls={ allScrolls } /></label>
+        <label>Count <input ref='count' type='number' /></label>
+        <input type='submit' value='Add' />
       </form>
     );
   }
