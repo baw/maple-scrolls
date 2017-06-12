@@ -12,7 +12,7 @@ class ScrollList extends Component {
   }
 
   render() {
-    let scrollIds = Object.keys(this.props.scrolls);
+    let scrollIds = Object.keys(this.props.scrolls || {});
     return (
       <ul>
         {
