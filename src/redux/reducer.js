@@ -20,7 +20,7 @@ type state = {
 
 const initalState: state = {
   characters: {},
-  currentCharacter: ""
+  currentCharacter: 'None Selected'
 }
 
 export default function (state: state = initalState, action: Actionable) {
@@ -39,6 +39,10 @@ export default function (state: state = initalState, action: Actionable) {
     case DELETE_CHARACTER_TYPE:
       newState.characters = Object.assign({}, newState.characters);
       delete newState.characters[action.name];
+
+      if (action.name === newState.currentCharacter) {
+        newState.currentCharacter = 'None Selected';
+      }
 
       return newState;
     case ADD_SCROLL_TO_CHARACTER_TYPE:
