@@ -3,6 +3,7 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { Grid, Row, Col } from 'react-bootstrap';
 
 import * as actions from './redux/actions';
 import CharacterList from './components/CharacterList';
@@ -13,9 +14,21 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>Maple Scrolls</h1>
-        <CharacterList characters={ this.props.characters } onAddCharacter={ this.props.actions.addCharacter } onDeleteCharacter={ this.props.actions.deleteCharacter } selectedCharacter={ this.props.currentCharacter } onSelectCharacter={ this.props.actions.selectCharacter }></CharacterList>
-        <Scrolls scrolls={ this.props.characters[this.props.currentCharacter] } characterName={ this.props.currentCharacter } onAddScroll={ this.props.actions.addScrollToCharacter } ></Scrolls>
+        <Grid>
+          <Row>
+            <Col xs={12} md={12}>
+              <h1>Maple Scrolls</h1>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={12} md={6}>
+              <CharacterList characters={ this.props.characters } onAddCharacter={ this.props.actions.addCharacter } onDeleteCharacter={ this.props.actions.deleteCharacter } selectedCharacter={ this.props.currentCharacter } onSelectCharacter={ this.props.actions.selectCharacter }></CharacterList>
+            </Col>
+            <Col xs={12} md={6}>
+              <Scrolls scrolls={ this.props.characters[this.props.currentCharacter] } characterName={ this.props.currentCharacter } onAddScroll={ this.props.actions.addScrollToCharacter } ></Scrolls>
+            </Col>
+          </Row>
+        </Grid>
       </div>
     );
   }

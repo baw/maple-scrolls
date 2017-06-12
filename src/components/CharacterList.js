@@ -19,8 +19,8 @@ class CharacterList extends Component {
   render() {
     return (
       <div>
+        <h2>Characters:</h2>
         <AddCharacter onAddCharacter={ this.props.onAddCharacter }></AddCharacter>
-        Characters:
         <ul>
           {
             Object.keys(this.props.characters).map((name) => {
